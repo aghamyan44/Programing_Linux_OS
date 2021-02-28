@@ -10,33 +10,33 @@ void change_capital(std::map<std::string, std::string>& capitals)
 	std::cin >> country_name;
 	std::cout << "Imput Capital: " << std::endl;
 	std::cin >> capital;
-	
-	if (capitals.find(capital) == capitals.end()) 
+
+	if (capitals.find(country_name) == capitals.end())
 	{
-		capitals[country_name] =  capital;
+		capitals[country_name] = capital;
 		std::cout << "New country {" << country_name << "} wtih capital{" << capital << "}" << std::endl;
 	}
-	else 
+	else
 	{
-		for (auto it = capitals.begin(); it != capitals.end(); ++it)
+		for (auto& it : capitals)
 		{
-			if (it->first == country_name) 
+			if (it.first == country_name)
 			{
-				if (it->second == capital) 
+				if (it.second == capital)
 				{
 					std::cout << "The capital of{" << country_name << "} hasn't been changed" << std::endl;
 				}
-				else 
+				else
 				{
-					it->second = capital;
-					std::cout << "The capital of{" << country_name <<  "} has been changed to{" << capital << " }" << std::endl;
+					it.second = capital;
+					std::cout << "The capital of{" << country_name << "} has been changed to{" << capital << " }" << std::endl;
 				}
 			}
 		}
 	}
 
 }
-void rename(std::map<std::string, std::string>& capitals) 
+void rename(std::map<std::string, std::string>& capitals)
 {
 	std::string old_country, new_country;
 	std::cout << "Imput Old Country: " << std::endl;
@@ -51,7 +51,7 @@ void rename(std::map<std::string, std::string>& capitals)
 
 	if (capitals.find(new_country) == capitals.end())
 	{
-		if (capitals.find(old_country) == capitals.end()) 
+		if (capitals.find(old_country) == capitals.end())
 		{
 			std::cout << "Incorrect rename." << std::endl;
 		}
@@ -59,15 +59,15 @@ void rename(std::map<std::string, std::string>& capitals)
 		{
 			std::string  second = capitals.find(old_country)->second;
 			capitals.erase(old_country);
-		    capitals[new_country] = second;
+			capitals[new_country] = second;
 			std::cout << "Country { " << old_country << "} has been renamed to {" << new_country << "}." << std::endl;
 		}
 	}
-	else 
+	else
 	{
 		std::cout << "Incorrect rename." << std::endl;
 	}
-	
+
 }
 void about(std::map<std::string, std::string>& capitals)
 {
@@ -79,17 +79,17 @@ void about(std::map<std::string, std::string>& capitals)
 	{
 		std::cout << "Country {" << country << "} does not exist." << std::endl;
 	}
-	else 
+	else
 	{
 		std::cout << "Country{" << country << "} has the capital{" << capitals.find(country)->second << "}." << std::endl;
 	}
 
 }
-void dumpall(std::map<std::string, std::string>& capitals) 
+void dumpall(std::map<std::string, std::string>& capitals)
 {
-	for (auto i = capitals.begin(); i != capitals.end(); ++i)
+	for (auto& it : capitals)
 	{
-		std::cout << "Country {" << i->first << "} has the capital {" << i->second << "}." << std::endl;
+		std::cout << "Country {" << it.first << "} has the capital {" << it.second << "}." << std::endl;
 	}
 }
 
@@ -98,7 +98,7 @@ void dumpall(std::map<std::string, std::string>& capitals)
 void parser(std::map<std::string, std::string>& capitals)
 {
 	std::string command;
-	
+
 	while (std::cin >> command)
 	{
 		std::cout << "Imput Command: ";
